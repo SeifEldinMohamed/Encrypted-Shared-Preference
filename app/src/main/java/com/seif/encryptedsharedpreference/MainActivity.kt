@@ -20,5 +20,23 @@ class MainActivity : AppCompatActivity() {
             putString("Title", "Junior Android Software Engineer")
             apply()
         }
+
+        getEncryptedSharedPreference().edit().apply {
+            putString("name", "Seif Eldin Mohamed")
+            putString("age", "21")
+            putString("Title", "Junior Android Software Engineer")
+            apply()
+        }
+
+    }
+    private fun getEncryptedSharedPreference() : SharedPreferences {
+        val masterKeyAlias = MasterKeys.getOrCreate(MasterKeys.AES256_GCM_SPEC)
+        return EncryptedSharedPreferences.create(
+            "encrypted_shared_preference",
+            masterKeyAlias,
+            this,
+            EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
+            EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
+        )
     }
 }
