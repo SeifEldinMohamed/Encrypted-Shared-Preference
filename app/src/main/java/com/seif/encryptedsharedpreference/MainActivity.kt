@@ -35,8 +35,10 @@ class MainActivity : AppCompatActivity() {
             "encrypted_shared_preference",
             masterKeyAlias,
             this,
-            EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
-            EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
+            EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV, // The encryption scheme to encrypt keys. Pref keys are encrypted deterministically with AES256-SIV-CMAC (RFC 5297)
+            EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM //The encryption scheme to encrypt values. Pref values are encrypted with AES256-GCM. The associated data is the encrypted pref key
         )
     }
 }
+
+// when we create encrypted shared prefernce we can set the name of shared preference file dynamically inside the code
